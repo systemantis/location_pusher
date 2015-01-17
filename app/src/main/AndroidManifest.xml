@@ -15,11 +15,12 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="mx.systemantis.locationpusher"
     android:versionCode="1"
     android:versionName="1.0">
 
-    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="18" />
+    <uses-sdk tools:overrideLibrary="com.google.android.gms"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET" />
@@ -27,7 +28,8 @@
     <application android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/Theme.Sample">
-
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <activity android:name=".MainActivity"
             android:label="@string/app_name"
             android:uiOptions="splitActionBarWhenNarrow">
