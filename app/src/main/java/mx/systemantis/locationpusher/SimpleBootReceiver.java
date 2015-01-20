@@ -12,8 +12,8 @@ import android.content.Intent;
  * device will not trigger this receiver.
  */
 // BEGIN_INCLUDE(autostart)
-public class SampleBootReceiver extends BroadcastReceiver {
-    SampleAlarmReceiver alarm = new SampleAlarmReceiver();
+public class SimpleBootReceiver extends BroadcastReceiver {
+    SimpleAlarmReceiver alarm = new SimpleAlarmReceiver();
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED"))

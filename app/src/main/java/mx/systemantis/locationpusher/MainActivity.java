@@ -21,17 +21,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
-/**
- * This sample demonstrates how to schedule an alarm that causes a service to
- * be started. This is useful when you want to schedule alarms that initiate
- * long-running operations, such as retrieving a daily forecast.
- * This particular sample retrieves content from the Google home page once a day and  
- * checks it for the search string "doodle". If it finds this string, that indicates 
- * that the page contains a custom doodle instead of the standard Google logo.
- */
 public class MainActivity extends Activity {
-    SampleAlarmReceiver alarm = new SampleAlarmReceiver();
+    SimpleAlarmReceiver alarm = new SimpleAlarmReceiver();
+    protected static final String TAG = "location-pusher";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -24,6 +24,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
@@ -40,15 +41,15 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".SampleAlarmReceiver"></receiver>
+        <receiver android:name=".SimpleAlarmReceiver"></receiver>
 
-        <receiver android:name=".SampleBootReceiver"
+        <receiver android:name=".SimpleBootReceiver"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
             </intent-filter>
         </receiver>
-        <service android:name=".SampleSchedulingService" />
+        <service android:name=".SimpleSchedulingService" />
     </application>
 
 </manifest>

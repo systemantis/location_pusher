@@ -18,20 +18,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class SampleSchedulingService extends IntentService {
-    public SampleSchedulingService() {
+public class SimpleSchedulingService extends IntentService {
+    public SimpleSchedulingService() {
         super("SchedulingService");
     }
 
     public static final String TAG = "Scheduling Demo";
     // An ID used to post the notification.
     public static final int NOTIFICATION_ID = 1;
-    // The string the app searches for in the Google home page content. If the app finds
-    // the string, it indicates the presence of a doodle.
-    public static final String SEARCH_STRING = "doodle";
-    // The Google home page URL from which the app fetches content.
-    // You can find a list of other Google domains with possible doodles here:
-    // http://en.wikipedia.org/wiki/List_of_Google_domains
+
     public static final String URL = "http://rest-service.guides.spring.io/greeting";
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
@@ -43,30 +38,21 @@ public class SampleSchedulingService extends IntentService {
 
         String result ="";
 
-        // Try to connect to the Google homepage and download content.
+        // Try to connect to get spring greeting.
         try {
             result = loadFromNetwork(urlString);
         } catch (IOException e) {
             Log.i(TAG, getString(R.string.connection_error));
         }
 
-        // If the app finds the string "doodle" in the Google home page content, it
-        // indicates the presence of a doodle. Post a "Doodle Alert" notification.
-//        if (result.indexOf(SEARCH_STRING) != -1) {
-//            sendNotification(getString(R.string.doodle_found));
-//            Log.i(TAG, "Found doodle!!");
-//        } else {
-//            sendNotification(getString(R.string.no_doodle));
-//            Log.i(TAG, "No doodle found. :-(");
-//        }
         sendNotification(getEventDate()+result);
         Log.i(TAG, "Restful response: " + getEventDate()+result);
         // Release the wake lock provided by the BroadcastReceiver.
-        SampleAlarmReceiver.completeWakefulIntent(intent);
+        SimpleAlarmReceiver.completeWakefulIntent(intent);
         // END_INCLUDE(service_onhandle)
     }
 
-    // Post a notification indicating whether a doodle was found.
+    // Post a notification
     private void sendNotification(String msg) {
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -136,7 +122,7 @@ public class SampleSchedulingService extends IntentService {
 
     /**
      * Reads an InputStream and converts it to a String.
-     * @param stream InputStream containing HTML from www.google.com.
+     * @param stream InputStream containing JSON response.
      * @return String version of InputStream.
      * @throws IOException
      */
